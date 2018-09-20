@@ -1,0 +1,20 @@
+# Hide hidden files 
+RedirectMatch 403 /\..*$
+
+# Deny dir listing
+Options -Indexes
+
+# Denying access to a LOGS directory
+RewriteEngine On
+RewriteRule (^|/)logs(/|$) - [F]
+
+# Only allow index.php to be used
+<Files *.php>
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+</Files>
+<Files index.php>
+    Order Allow,Deny
+    Allow from all
+</Files>
